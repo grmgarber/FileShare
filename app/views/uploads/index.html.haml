@@ -1,14 +1,18 @@
 %h1 Uploads#index
 
-%table
-  %thead
-  %tbody
-    %tr
-      %th Description
-      %th Created
-      %th Updated
-    - @uploads.each do |u|
+=link_to 'New Upload', new_upload_path
+- unless @uploads.empty?
+  %table
+    %thead
+    %tbody
       %tr
-        %td= u.description
-        %td= u.created_at
-        %td= u.updated_at
+        %th Description
+        %th Created
+        %th Updated
+        %th Operations
+      - @uploads.each do |u|
+        %tr
+          %td= u.description
+          %td= u.created_at
+          %td= u.updated_at
+          %td= link_to 'Delete', upload_path(u), method: :delete

@@ -19,7 +19,14 @@ class UploadsController < ApplicationController
   def show
   end
 
-  def delete
+  def destroy
+    u = Upload.find(params[:id])
+    if u
+       u.destroy
+       redirect_to uploads_path, notice: "Successfully deleted upload id=#{params[:id]}"
+    else
+       redirect_to uploads_path, alert: "Unable to delete upload id=#{params[:id]}"
+    end
   end
 
   def index

@@ -1,6 +1,12 @@
-%h1 Uploads#new
+%h3 Create a New Upload
 
 = form_for @u, method: :post  do |f|
-  = f.label :description
-  = f.text_field :description
-  = f.submit
+  .entry
+    = f.label :up_file, 'File'
+    = f.file_field :up_file
+  .entry
+    = f.label :description
+    = f.text_field :description
+  .entry
+    = f.label :submit, style: 'visibility: hidden'
+    = f.submit

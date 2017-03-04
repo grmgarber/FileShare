@@ -8,6 +8,19 @@
 </head>
 <body>
 
+<div class="flash">
+    <%- unless flash.now[:alert].blank? %>
+      <div class="alert">
+          <%= flash.now[:alert] %>
+      </div>
+    <%- end %>
+    <%- unless flash.now[:notice].blank? %>
+        <div class="notice">
+              <%= flash.now[:notice] %>
+        </div>
+    <%- end %>
+</div>
+<h2> Uploads Manager</h2>
 <%= yield %>
 
 </body>

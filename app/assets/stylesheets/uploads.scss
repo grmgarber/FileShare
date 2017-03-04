@@ -1,3 +1,24 @@
 // Place all the styles related to the uploads controller here.
 // They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.flash {
+  font-weight: bold;
+  .alert {
+    background-color: pink;
+  }
+
+  .notice {
+    background-color: lightblue
+  }
+}
+
+.entry {
+  padding: 10px 5px;
+
+  label {
+    vertical-align: middle;
+    display: inline-block;
+    width: 90px;
+    overflow-x: hidden;
+  }
+}
