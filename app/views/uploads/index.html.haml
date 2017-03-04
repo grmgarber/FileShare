@@ -1,0 +1,14 @@
+%h1 Uploads#index
+
+%table
+  %thead
+  %tbody
+    %tr
+      %th Description
+      %th Created
+      %th Updated
+    - @uploads.each do |u|
+      %tr
+        %td= u.description
+        %td= u.created_at
+        %td= u.updated_at
