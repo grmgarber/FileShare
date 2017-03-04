@@ -20,7 +20,7 @@ class UploadsController < ApplicationController
   end
 
   def destroy
-    u = Upload.find(params[:id])
+    u = Upload.find(params[:id])   rescue nil
     if u
        u.destroy
        redirect_to uploads_path, notice: "Successfully deleted upload id=#{params[:id]}"
