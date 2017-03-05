@@ -1,22 +1,34 @@
 class UploadsController < ApplicationController
   def new
-    @u = Upload.new description: 'Default'
+    @u = Upload.new
   end
 
   def create
-    upar = params[:upload]
-    u = Upload.new description: upar[:description]
-    u.save
-    redirect_to uploads_path
+    @u = Upload.new
+    @u.update_attributes user_params
+    if @u.errors.empty?
+      redirect_to uploads_path, notice: 'Upload created successfully'
+    else
+      render 'new'
+    end
   end
 
   def edit
+    @u = Upload.find(params[:id])
   end
 
   def update
+    @u = Upload.find(params[:id])   rescue nil
+    @u.description =  user_params[:description]
+    if @u.save
+      redirect_to uploads_path, notice: 'Upload updated successfully'
+    else
+      render 'edit'
+    end
   end
 
   def show
+    @u = Upload.find(params[:id])
   end
 
   def destroy
@@ -31,5 +43,11 @@ class UploadsController < ApplicationController
 
   def index
     @uploads = Upload.all
+  end
+
+  private
+
+  def user_params
+    params.require(:upload).permit(:upl_file, :description)
   end
 end

@@ -1,2 +1,15 @@
-%h1 Uploads#edit
-%p Find me in app/views/uploads/edit.html.haml
+%%h3 Edit Upload
+
+= link_to 'Cancel', uploads_path
+
+= form_for @u, path: upload_path(@u)  do |f|
+  .entry
+    = f.label :description
+    = f.text_field :description
+    - errors_for(@u,:description)
+  .entry
+    = f.label :submit, style: 'visibility: hidden'
+    = f.submit
+
+
+=image_tag @u.upl_file.url(:medium)

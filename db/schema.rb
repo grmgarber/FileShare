@@ -11,12 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170304024324) do
+ActiveRecord::Schema.define(version: 20170304190839) do
 
   create_table "uploads", force: :cascade do |t|
     t.string   "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.string   "upl_file_file_name"
+    t.string   "upl_file_content_type"
+    t.integer  "upl_file_file_size"
+    t.datetime "upl_file_updated_at"
   end
 
 end

@@ -8,6 +8,10 @@
 </head>
 <body>
 
+<h2> Uploads Manager</h2>
+<label for="local_tz">Use Local TZ</label>
+<input id="local_tz" name="local_tz" type="checkbox" value="local_tz" />
+
 <div class="flash">
     <%- unless flash.now[:alert].blank? %>
       <div class="alert">
@@ -20,7 +24,7 @@
         </div>
     <%- end %>
 </div>
-<h2> Uploads Manager</h2>
+
 <%= yield %>
 
 </body>
