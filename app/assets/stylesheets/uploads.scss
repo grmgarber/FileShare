@@ -9,6 +9,13 @@ body {
 .contents {
   display: inline-block;
 
+  embed {
+    display: block;
+    width: 300px;
+    height: 300px;
+    margin: 10px auto;
+  }
+
 
   a {
     &.opera {
@@ -103,6 +110,5 @@ body {
   img.attachment {
     display: block;
     margin: 10px auto;
-    //width: 300px;
   }
 }

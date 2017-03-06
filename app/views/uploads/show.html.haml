@@ -22,7 +22,7 @@
       %td= @u.upl_file_updated_at
 
 - if @u.upl_file_content_type =~ /pdf\Z/i
-  %embed{src: @u.upl_file.url(:original), width: '200', height: '200', alt: 'pdf', pluginspage: 'http://www.adobe.com/products/acrobat/readstep2.html'}
+  %embed{src: @u.upl_file.url(:original), alt: 'pdf', pluginspage: 'http://www.adobe.com/products/acrobat/readstep2.html'}
 - else
   = image_tag @u.upl_file.url(:original), class: 'attachment', width: 200, height: 200
 
