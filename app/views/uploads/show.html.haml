@@ -1,6 +1,6 @@
 %h3 Show Upload
 
-=link_to 'Cancel', uploads_path
+=link_to 'Cancel', uploads_path, class: 'cancel_btn'
 
 %table.name-value
   %thead
@@ -21,6 +21,9 @@
       %td File Attached
       %td= @u.upl_file_updated_at
 
-=image_tag @u.upl_file.url(:medium)
+- if @u.upl_file_content_type =~ /pdf\Z/i
+  %embed{src: @u.upl_file.url(:original), width: '200', height: '200', alt: 'pdf', pluginspage: 'http://www.adobe.com/products/acrobat/readstep2.html'}
+- else
+  = image_tag @u.upl_file.url(:original), class: 'attachment', width: 200, height: 200
 
 

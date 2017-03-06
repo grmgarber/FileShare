@@ -7,5 +7,4 @@ class Upload < ActiveRecord::Base
 
   validates :description, presence: true, length: {within: 1..50}
 
-
 end

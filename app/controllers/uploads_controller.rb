@@ -1,4 +1,5 @@
 class UploadsController < ApplicationController
+
   def new
     @u = Upload.new
   end
@@ -23,6 +24,7 @@ class UploadsController < ApplicationController
     if @u.save
       redirect_to uploads_path, notice: 'Upload updated successfully'
     else
+      flash.now[:alert] = GENERIC_FORM_ERROR_FLASH
       render 'edit'
     end
   end

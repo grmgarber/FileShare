@@ -1,20 +1,23 @@
 %h3 All Uploads
 
-- unless @uploads.empty?
-  %table
-    %thead
-    %tbody
+
+%table
+  %thead
+  %tbody
+    %tr
+      %th File Name
+      %th Description
+      %th Meta Updated At
+      %th= link_to 'New Upload', new_upload_path
+    - @uploads.each do |u|
       %tr
-        %th File Name
-        %th Description
-        %th Meta Updated At
-        %th= link_to 'New Upload', new_upload_path
-      - @uploads.each do |u|
-        %tr
-          %td u.upl_file_file_name
-          %td= u.description
-          %td= u.updated_at
-          %td
-            = link_to 'Show', upload_path(u)
-            = link_to 'Edit', edit_upload_path(u)
-            = link_to 'Delete', upload_path(u), method: :delete
+        %td= u.upl_file_file_name
+        %td= u.description
+        %td= u.updated_at
+        %td
+          = link_to (image_tag 'Details.png'), upload_path(u), title: 'Show Details', class: 'opera'
+          = link_to (image_tag 'Edit.png'), edit_upload_path(u), class: 'opera', title: 'Edit'
+          = link_to (image_tag 'Delete.png'), upload_path(u), class: 'opera', method: :delete, title: 'Delete', data: {confirm: 'Are you sure?'}
+          = link_to 'Download', u.upl_file.url(:original)
+
+

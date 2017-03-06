@@ -7,25 +7,26 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<div class="contents">
+    <h2> Uploads Manager</h2>
 
-<h2> Uploads Manager</h2>
-<label for="local_tz">Use Local TZ</label>
-<input id="local_tz" name="local_tz" type="checkbox" value="local_tz" />
 
-<div class="flash">
-    <%- unless flash.now[:alert].blank? %>
-      <div class="alert">
-          <%= flash.now[:alert] %>
-      </div>
-    <%- end %>
-    <%- unless flash.now[:notice].blank? %>
-        <div class="notice">
-              <%= flash.now[:notice] %>
-        </div>
-    <%- end %>
+    <div class="flash">
+        <%- unless flash.now[:alert].blank? %>
+          <div class="alert">
+              <%= flash.now[:alert] %>
+          </div>
+        <%- end %>
+        <%- unless flash.now[:notice].blank? %>
+            <div class="notice">
+                  <%= flash.now[:notice] %>
+            </div>
+        <%- end %>
+    </div>
+
+
+    <%= yield %>
 </div>
-
-<%= yield %>
 
 </body>
 </html>
