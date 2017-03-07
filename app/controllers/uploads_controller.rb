@@ -17,11 +17,19 @@ class UploadsController < ApplicationController
 
   def edit
     @u = Upload.find(params[:id])
+
+    # prepare json data for members autocomplete
+    @json_members = (User.where.not(id: current_user.id).order('email').select('id, email').inject(Hash.new) do |h,u|
+      h[u.email] = u.id; next h
+    end).to_json
   end
 
   def update
     @u = Upload.find(params[:id])   rescue nil
     @u.description =  upload_params[:description]
+
+
+
     if @u.save
       redirect_to uploads_path, notice: 'Upload updated successfully'
     else

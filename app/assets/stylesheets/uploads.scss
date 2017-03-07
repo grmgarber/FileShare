@@ -103,6 +103,11 @@ body {
       font-size: 12px;
       font-style: italic;
     }
+
+    input[type="text"]#upload_description {
+      width: 240px;
+
+    }
   }
 
   table {

@@ -27,6 +27,7 @@ gem "haml-rails", "~> 0.9"
 gem 'paperclip', '~> 5.1'
 gem 'thin'
 gem 'devise'
+gem 'jquery-ui-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

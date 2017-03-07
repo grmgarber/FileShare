@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
-//  require turbolinks   // it breaks jQuery events. either add jquery-turbolinks gem, or
+//= require jquery-ui
+//  require turbolinks   // it breaks jQuery events. either add jquery-turbolinks gem
 //  require uploads      // should be included automatically
 //= require_tree .
