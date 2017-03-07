@@ -6,7 +6,7 @@ class UploadsController < ApplicationController
 
   def create
     @u = Upload.new
-    @u.update_attributes user_params
+    @u.update_attributes upload_params
     if @u.errors.empty?
       redirect_to uploads_path, notice: 'Upload created successfully'
     else
@@ -20,7 +20,7 @@ class UploadsController < ApplicationController
 
   def update
     @u = Upload.find(params[:id])   rescue nil
-    @u.description =  user_params[:description]
+    @u.description =  upload_params[:description]
     if @u.save
       redirect_to uploads_path, notice: 'Upload updated successfully'
     else
@@ -49,7 +49,7 @@ class UploadsController < ApplicationController
 
   private
 
-  def user_params
+  def upload_params
     params.require(:upload).permit(:upl_file, :description)
   end
 end

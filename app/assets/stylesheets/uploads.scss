@@ -1,6 +1,9 @@
 // Place all the styles related to the uploads controller here.
 // They will automatically be included in application.css.
 
+$header-back-color : Navy;
+$header-fore-color  : #E0E0E0;
+
 body {
   font-family: Georgia, sans-serif;
   font-size: 13px;
@@ -8,6 +11,30 @@ body {
 
 .contents {
   display: inline-block;
+  min-width: 500px;
+
+  .header-wrapper {
+    background-color: $header-back-color;
+    color: $header-fore-color;
+    min-height: 45px;
+
+    position: relative;
+    h2 {
+      display: inline-block;
+    }
+    .main-menu {
+      span.user {
+        margin-right: 15px;
+      }
+      display: inline-block;
+      position: absolute;
+      top:   20px;
+      right: 5px;
+      a {
+        color: $header-fore-color;
+      }
+    }
+  }
 
   embed {
     display: block;
