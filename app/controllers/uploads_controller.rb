@@ -6,8 +6,9 @@ class UploadsController < ApplicationController
 
   def create
     @u = Upload.new
-    @u.update_attributes upload_params
-    if @u.errors.empty?
+    @u.attributes = upload_params
+    @u.user = current_user
+    if@u.save
       redirect_to uploads_path, notice: 'Upload created successfully'
     else
       render 'new'
@@ -44,7 +45,7 @@ class UploadsController < ApplicationController
   end
 
   def index
-    @uploads = Upload.all
+    @uploads = Upload.where(user: current_user)
   end
 
   private
