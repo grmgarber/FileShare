@@ -8,8 +8,17 @@
 </head>
 <body>
 <div class="contents">
-    <h2> Uploads Manager</h2>
-
+    <div class="header-wrapper">
+        <h2> Uploads Manager</h2>
+        <div class="main-menu">
+            <%- if user_signed_in? %>
+                <span class="user">
+                    <%= current_user.email %>
+                </span>
+                <%=link_to 'Sign Out', destroy_user_session_path, method: :delete %>
+            <% end %>
+        </div>
+    </div>
 
     <div class="flash">
         <%- unless flash.now[:alert].blank? %>
