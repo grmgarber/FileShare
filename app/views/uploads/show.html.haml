@@ -1,29 +1,5 @@
 %h3 Show Upload
 
-=link_to 'Cancel', uploads_path, class: 'cancel_btn'
+= render 'upinfo'
 
-%table.name-value
-  %thead
-  %tbody
-    %tr
-      %td Description
-      %td= @u.description
-    %tr
-      %td File Name
-      %td= @u.upl_file_file_name
-    %tr
-      %td  File Size (bytes)
-      %td= @u.upl_file_file_size
-    %tr
-      %td Content Type
-      %td= @u.upl_file_content_type
-    %tr
-      %td File Attached
-      %td= @u.upl_file_updated_at
-
-- if @u.upl_file_content_type =~ /pdf\Z/i
-  %embed{src: @u.upl_file.url(:original), alt: 'pdf', pluginspage: 'http://www.adobe.com/products/acrobat/readstep2.html'}
-- else
-  = image_tag @u.upl_file.url(:original), class: 'attachment', width: 200, height: 200
-
-
+=link_to 'Cancel', uploads_path, class: 'cancel_btn', style: 'margin-left: 150px;'

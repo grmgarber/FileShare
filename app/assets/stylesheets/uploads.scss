@@ -38,9 +38,9 @@ body {
 
   embed {
     display: block;
-    width: 300px;
+    width: 340px;
     height: 300px;
-    margin: 10px auto;
+    margin-top: 10px;
   }
 
 
@@ -119,6 +119,8 @@ body {
     }
 
     &.name-value {
+      width: 342px;
+      border: 2px solid black;
       tr {
         td {
           &:nth-of-type(1) {
@@ -135,7 +137,8 @@ body {
   }
 
   img.attachment {
+    border: 2px solid black;
     display: block;
-    margin: 10px auto;
+    margin-top: 10px;
   }
 }
