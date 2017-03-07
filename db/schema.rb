@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170307150926) do
+ActiveRecord::Schema.define(version: 20170307165924) do
 
   create_table "uploads", force: :cascade do |t|
     t.string   "description"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20170307150926) do
     t.string   "upl_file_content_type"
     t.integer  "upl_file_file_size"
     t.datetime "upl_file_updated_at"
+    t.integer  "user_id"
   end
 
   create_table "users", force: :cascade do |t|
