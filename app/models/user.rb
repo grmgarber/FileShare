@@ -5,5 +5,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :uploads
+  has_many :grants    # these are grants given TO the user. Do not care about those given BY the user
+
+  # Those created by the user plus those granted by other users
+
 
 end

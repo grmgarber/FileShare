@@ -16,8 +16,9 @@
         %td= u.updated_at
         %td
           = link_to (image_tag 'Details.png'), upload_path(u), title: 'Show Details', class: 'opera'
-          = link_to (image_tag 'Edit.png'), edit_upload_path(u), class: 'opera', title: 'Edit'
-          = link_to (image_tag 'Delete.png'), upload_path(u), class: 'opera', method: :delete, title: 'Delete', data: {confirm: 'Are you sure?'}
           = link_to 'Download', u.upl_file.url(:original)
+          - if u.user_id == current_user.id
+            = link_to (image_tag 'Edit.png'), edit_upload_path(u), class: 'opera', title: 'Edit'
+            = link_to (image_tag 'Delete.png'), upload_path(u), class: 'opera', method: :delete, title: 'Delete', data: {confirm: 'Are you sure?'}
 
 

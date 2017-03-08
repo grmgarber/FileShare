@@ -28,8 +28,6 @@ class UploadsController < ApplicationController
     @u = Upload.find(params[:id])   rescue nil
     @u.description =  upload_params[:description]
 
-
-
     if @u.save
       redirect_to uploads_path, notice: 'Upload updated successfully'
     else
@@ -53,7 +51,7 @@ class UploadsController < ApplicationController
   end
 
   def index
-    @uploads = Upload.where(user: current_user)
+    @uploads = Upload.all_viewable_by(current_user)
   end
 
   private
