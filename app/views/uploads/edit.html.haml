@@ -7,8 +7,8 @@
 
 
 #accordion
-  .h3 Image and Description
-  .div
+  %h3 Image and Description
+  %div
     =render 'upinfo'
 
     = form_for @u, path: upload_path(@u), remote: true  do |f|
@@ -20,8 +20,8 @@
         = f.label :submit, style: 'visibility: hidden'
         = f.submit 'Update Description'
         -#= link_to 'Cancel', uploads_path, class: 'cancel_btn'
-  .h3 Access by Other Users
-  .div
+  %h3 Access by Other Users
+  %div
     = form_for [@u,@new_grant], path: upload_grants_path(@u) do |f|
       = label_tag :email
       = text_field_tag :email
