@@ -19,9 +19,13 @@ class UploadsController < ApplicationController
     @u = Upload.find(params[:id])
 
     # prepare json data for members autocomplete
-    @json_members = (User.where.not(id: current_user.id).order('email').select('id, email').inject(Hash.new) do |h,u|
-      h[u.email] = u.id; next h
-    end).to_json
+    # @json_members = (User.where.not(id: current_user.id).order('email').select('id, email').inject(Hash.new) do |h,u|
+    #   h[u.email] = u.id; next h
+    # end).to_json
+
+
+    @new_grant = Grant.new(upload: @u)
+
   end
 
   def update

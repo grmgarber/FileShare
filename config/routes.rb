@@ -56,7 +56,9 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
   
-  resources :uploads
+  resources :uploads do
+    resources :grants, only: [:create, :destroy]
+  end
 
   root 'uploads#index'
 

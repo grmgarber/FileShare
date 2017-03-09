@@ -1,16 +1,36 @@
 %h3 Edit Upload
 
-=render 'upinfo'
-
-= form_for @u, path: upload_path(@u), remote: true  do |f|
-  .entry
-    = f.label :description
-    = f.text_field :description
-    - errors_for(@u,:description)
-  .entry
-    = f.label :submit, style: 'visibility: hidden'
-    = f.submit 'Update Description'
-    -#= link_to 'Cancel', uploads_path, class: 'cancel_btn'
-
 = hidden_field_tag :members_json, @json_members
-= text_field_tag :members_autocomp
+= hidden_field_tag :accordion_tab_number, flash.now[:accordion_tab_number] || "0"
+-#= text_field_tag :members_autocomp
+-#= button_tag 'Add', id: 'add-viewer'
+
+
+#accordion
+  .h3 Image and Description
+  .div
+    =render 'upinfo'
+
+    = form_for @u, path: upload_path(@u), remote: true  do |f|
+      .entry
+        = f.label :description
+        = f.text_field :description
+        - errors_for(@u,:description)
+      .entry
+        = f.label :submit, style: 'visibility: hidden'
+        = f.submit 'Update Description'
+        -#= link_to 'Cancel', uploads_path, class: 'cancel_btn'
+  .h3 Access by Other Users
+  .div
+    = form_for [@u,@new_grant], path: upload_grants_path(@u) do |f|
+      = label_tag :email
+      = text_field_tag :email
+      = f.submit 'Add Viewer'
+
+    - @u.grants.each do |g|
+      .entry
+        %span= g.user.email
+        = link_to (image_tag 'Delete.png'), upload_grant_path(@u.id,g.id), method: :delete, remote: true
+
+
+

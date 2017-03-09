@@ -4,6 +4,10 @@ $(document).ready(function() {
        var members = JSON.parse(jq_members.val());
        $("#members_autocomp").autocomplete({
            source: Object.keys(members)
-       })
+       });
    }
+   $("#accordion" ).accordion({
+       active: JSON.parse($("#accordion_tab_number").val())
+   })
 })
+
