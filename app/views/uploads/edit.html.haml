@@ -21,16 +21,9 @@
         = f.submit 'Update Description'
         -#= link_to 'Cancel', uploads_path, class: 'cancel_btn'
   %h3 Access by Other Users
-  %div
-    = form_for [@u,@new_grant], path: upload_grants_path(@u) do |f|
-      = label_tag :email
-      = text_field_tag :email
-      = f.submit 'Add Viewer'
+  #grants-form-container
+    = render partial: 'grants/grants_form'
 
-    - @u.grants.each do |g|
-      .entry
-        %span= g.user.email
-        = link_to (image_tag 'Delete.png'), upload_grant_path(@u.id,g.id), method: :delete, remote: true
 
 
 

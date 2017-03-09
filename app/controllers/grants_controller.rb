@@ -8,12 +8,26 @@ class GrantsController < ApplicationController
     g = Grant.new(upload_id: params[:upload_id])
     user = User.where(email: params[:email]).limit(1).try(:first)
     g.user = user
-    if g.save
-      redirect_to edit_upload_path(params[:upload_id]), notice: "User #{user.email} given permission to view the upload"
+    if user && g.save
+      if request.xhr?
+        @u = Upload.find(params[:upload_id])
+        @new_grant = g
+        render 'create', layout: false
+      else
+        redirect_to edit_upload_path(params[:upload_id]), notice: "User #{user.email} given permission to view the upload"
+      end
       return
     end
-    redirect_to edit_upload_path(params[:upload_id]),
-        alert: (user ? "Unable to permit #{params[:email]} viewing this upload" : "User #{params[:email]} not found")
+    if user
+      message = g.errors.full_messages.join("; ")
+    else
+      message = "User account for #{params[:email]} not found"
+    end
+    if request.xhr?
+      render json: {error: message}
+    else
+      redirect_to edit_upload_path(params[:upload_id]), alert: message
+    end
   end
 
   def destroy
