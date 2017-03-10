@@ -7,7 +7,7 @@ class GrantsController < ApplicationController
   def create
     g = Grant.new(upload_id: params[:upload_id])
     user = User.where(email: params[:email]).limit(1).try(:first)
-    message = 'You do not need readonly access to your own files'  if user.id == current_user.id
+    message = 'You do not need readonly access to your own files'  if user && user.id == current_user.id
     g.user = user
     if user && user.id != current_user.id && g.save
       g.user = user
