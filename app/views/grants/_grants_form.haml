@@ -3,8 +3,9 @@
   = text_field_tag :email
   = f.submit 'Add Viewer'
 
-  - @u.grants.each do |g|
-    .entry
-      %span= g.user.email
-      -# Comment out remote: true to disable XHR for delete
-      = link_to (image_tag 'Delete.png'), upload_grant_path(@u.id,g.id), method: :delete, remote: true
+  .list
+    - @u.grants.includes(:user).order('users.email').each do |g|
+      .list-item
+        %span= g.user.email
+        -# Comment out remote: true to disable XHR for delete
+        = link_to (image_tag 'Delete.png'), upload_grant_path(@u.id,g.id), method: :delete, remote: true

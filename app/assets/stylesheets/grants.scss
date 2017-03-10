@@ -1,3 +1,14 @@
 // Place all the styles related to the Grants controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#grants-form-container {
+  .list {
+    margin: 10px 0 0 37px;
+    div.list-item {
+      span {
+        vertical-align: top;
+      }
+    }
+  }
+}

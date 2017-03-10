@@ -7,11 +7,13 @@ class GrantsController < ApplicationController
   def create
     g = Grant.new(upload_id: params[:upload_id])
     user = User.where(email: params[:email]).limit(1).try(:first)
+    message = 'You do not need readonly access to your own files'  if user.id == current_user.id
     g.user = user
-    if user && g.save
+    if user && user.id != current_user.id && g.save
+      g.user = user
       if request.xhr?
         @u = Upload.find(params[:upload_id])
-        @new_grant = g
+        @new_grant = Grant.new(upload_id: params[:upload_id])
         render 'create', layout: false
       else
         redirect_to edit_upload_path(params[:upload_id]), notice: "User #{user.email} given permission to view the upload"
@@ -19,7 +21,7 @@ class GrantsController < ApplicationController
       return
     end
     if user
-      message = g.errors.full_messages.join("; ")
+      message ||= g.errors.full_messages.join("; ")
     else
       message = "User account for #{params[:email]} not found"
     end
