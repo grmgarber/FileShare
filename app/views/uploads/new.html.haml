@@ -2,6 +2,7 @@
 
 
 = form_for @u, method: :post, html: {multipart: true}  do |f|
+  %p Only Image and PDF files are accepted!
   .entry
     = f.label :up_file, 'File'
     = f.file_field :upl_file

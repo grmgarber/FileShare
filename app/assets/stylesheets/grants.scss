@@ -3,6 +3,9 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 #grants-form-container {
+  input[type="submit"] {
+    margin-left: 5px;
+  }
   .list {
     margin: 10px 0 0 37px;
     div.list-item {
