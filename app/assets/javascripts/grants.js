@@ -25,6 +25,7 @@ $(function() {
                     switch (jQuery.type(data)) {
                         case "string":
                             $(e.target).parent().html(data);
+                            setup_autocomplete();
                             flash_notice("User " + email.val() + " given read-only access to this upload");
                             break;
                         case "object":

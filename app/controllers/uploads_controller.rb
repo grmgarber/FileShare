@@ -58,6 +58,12 @@ class UploadsController < ApplicationController
     @uploads = Upload.all_viewable_by(current_user)
   end
 
+  # This method will return emails of users who can be added to the list of viewers of the current upload
+  # jQuery UI passes a :term parameter with N letters typed into the autocomplete field
+  def potential_grantees
+    render json: User.potential_grantee_emails(current_user.id, params[:id], params['term'])
+  end
+
   private
 
   def upload_params

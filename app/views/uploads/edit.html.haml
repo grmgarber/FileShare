@@ -1,9 +1,10 @@
 %h3 Edit Upload
 
-= hidden_field_tag :members_json, @json_members
+-# Pass to JS the tab number (0-based) to open
 = hidden_field_tag :accordion_tab_number, flash.now[:accordion_tab_number] || "0"
--#= text_field_tag :members_autocomp
--#= button_tag 'Add', id: 'add-viewer'
+
+-#Pass the upload ID to JS (to generate AJAX autocoplete path)
+= hidden_field_tag :upload_id, params[:id]
 
 
 #accordion
@@ -19,7 +20,7 @@
       .entry
         = f.label :submit, style: 'visibility: hidden'
         = f.submit 'Update Description'
-        -#= link_to 'Cancel', uploads_path, class: 'cancel_btn'
+
   %h3 Access by Other Users
   #grants-form-container
     = render partial: 'grants/grants_form'

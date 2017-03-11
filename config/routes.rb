@@ -57,6 +57,10 @@ Rails.application.routes.draw do
   #   end
   
   resources :uploads do
+    # member do
+    #   get :potential_grantees
+    # end
+    get :potential_grantees, on: :member
     resources :grants, only: [:create, :destroy]
   end
 

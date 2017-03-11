@@ -43,6 +43,12 @@ class GrantsController < ApplicationController
 
   end
 
+  # This method will return emails of []all users - (current user) - (users who can currently view the upload)
+  def potential_grantee_emails(upload_id)
+    grantee_user_ids  = Grant.where(upload_id: upload_id).select('user_id').map(&:user_id)
+    User.where("id NOT IN (?)", grantee_user_ids).where.not(id: current_user_id).map(&:email)
+  end
+
   def set_tab_number
     flash[:accordion_tab_number] = "1"
   end
