@@ -9,6 +9,7 @@ class Upload < ActiveRecord::Base
                        content_type: {content_type: [/\Aimage\/.*\z/, 'application/pdf']},
                        size: { in: 1..3000.kilobytes}
 
+  validates :user, presence: true
   validates :description, presence: true, length: {within: 1..50}
 
 
