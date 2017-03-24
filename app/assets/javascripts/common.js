@@ -22,7 +22,12 @@ $(function(){
 function setup_autocomplete() {
     $('input#email[type="text"]').autocomplete({
         source: "/uploads/" + $("#upload_id").val() + "/potential_grantees",
-        minLength: 3
-        // select: function(event,item) {...}
+        minLength: 3,
+        select: function(event,ui) {
+            if (ui.item.label === '... more available ...') {
+                event.preventDefault();
+                return false;
+            }
+        }
     })
 }
