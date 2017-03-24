@@ -39,7 +39,7 @@ RSpec.describe Upload do
     expect(@upload).to be_valid
   end
 
-  it 'returns expected uploads from ' do
+  it 'correctly calculates uploads visible by various uses' do
     user1 = create(:user)
     user2 = create(:user)
     user3 = create(:user)
