@@ -2,6 +2,7 @@ FactoryGirl.define do
   factory :user do
     sequence(:id) {|n| n}
     sequence(:email) {|n| "test#{n}@gmail.com"}
+    encrypted_password User.new.send(:password_digest,'123456')
     password '123456'
   end
 
