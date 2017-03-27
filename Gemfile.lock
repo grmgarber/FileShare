@@ -64,6 +64,7 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
     daemons (1.2.4)
+    database_cleaner (1.5.3)
     debug_inspector (0.0.2)
     devise (4.2.0)
       bcrypt (~> 3.0)
@@ -233,6 +234,7 @@ DEPENDENCIES
   byebug
   capybara
   coffee-rails (~> 4.1.0)
+  database_cleaner
   devise
   factory_girl_rails
   haml-rails (~> 0.9)
