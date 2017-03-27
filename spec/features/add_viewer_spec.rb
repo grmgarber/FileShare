@@ -9,9 +9,11 @@ describe "adding a new viewer (grantee) to an upload" do
     click_button 'Log in'
   end
 
-  let(:user) {User.create(email: 'test@example.com', password: 'TestPass')}
+  let(:user)  {User.create(email: 'test@example.com', password: 'TestPass')}
+  let(:user1) {User.create(email: 'test1@example.com', password: 'TestPass')}
+  let(:user2) {User.create(email: 'test2@example.com', password: 'TestPass')}
 
-  it "can add a viewer to an upload" do
+  it "can add a viewer to an upload", js: true do
     log_in_as(user)
     expect(current_path).to eq(root_path)
     click_link 'New Upload'
@@ -23,5 +25,14 @@ describe "adding a new viewer (grantee) to an upload" do
     within('.flash') do
       expect(page).to have_selector('.notice', text: 'Upload created successfully')
     end
+    within('tr td:last-child') do
+      click_link 'Edit'
+    end
+    expect(page).to have_selector('h3', text: 'Edit Upload')
+    expect(user1.email).to eq('test1@example.com')
+    expect(user2.email).to eq('test2@example.com')
+    page.assert_selector('#accordion h3.ui-accordion-header', count: 2)
+    page.all('#accordion h3.ui-accordion-header').last.click
+    expect(page.find('input#email').visible?).to be_truthy
   end
 end
