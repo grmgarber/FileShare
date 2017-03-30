@@ -24,6 +24,7 @@ And /^User visits Edit Upload page$/ do
 end
 
 And /^User selects Access by Other Users tab$/ do
+  # page.driver.debugger       # this will open byebug session
   page.all('#accordion h3').last.click
 end
 
