@@ -9,18 +9,8 @@
 
 #accordion
   %h3 Image and Description
-  %div
-    =render 'upinfo'
-
-    = form_for @u, path: upload_path(@u), remote: true  do |f|
-      .entry
-        = f.label :description
-        = f.text_field :description
-        - errors_for(@u,:description)
-      .entry
-        = f.label :submit, style: 'visibility: hidden'
-        = f.submit 'Update Description'
-
+  #upload_form_container
+    = render partial: 'upload_form'
   %h3 Access by Other Users
   #grants-form-container
     = render partial: 'grants/grants_form'

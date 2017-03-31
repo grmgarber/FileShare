@@ -1,0 +1,9 @@
+= form_for @u, path: upload_path(@u), remote: true do |f|
+  =render 'upinfo'
+  .entry
+    = f.label :description
+    = f.text_field :description
+    - errors_for(@u,:description)
+  .entry
+    = f.label :submit, style: 'visibility: hidden'
+    = f.submit 'Update Description'

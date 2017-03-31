@@ -1,5 +1,7 @@
 class UploadsController < ApplicationController
 
+  respond_to :html, :js
+
   def new
     @u = Upload.new
   end
@@ -28,15 +30,21 @@ class UploadsController < ApplicationController
 
   end
 
+  # UploadsController#update demonstrates the new Rails4 way,
+  # with Unobtrusive JavaScript (form remote: true triggering AJAX)
   def update
     @u = Upload.find(params[:id])   rescue nil
     @u.description =  upload_params[:description]
-
-    if @u.save
-      redirect_to uploads_path, notice: 'Upload updated successfully'
-    else
-      flash.now[:alert] = GENERIC_FORM_ERROR_FLASH
-      render 'edit'
+    respond_to do |format|
+      if @u.save
+        format.js
+        format.html {redirect_to edit_upload_path(@u.id), notice: 'Description updated successfully'}
+      else
+        format.html do
+          flash.now[:alert] = GENERIC_FORM_ERROR_FLASH
+          render 'edit'
+        end
+      end
     end
   end
 
