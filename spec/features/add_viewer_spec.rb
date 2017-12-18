@@ -22,10 +22,10 @@ describe "adding a new viewer (grantee) to an upload" do
     fill_in('upload[description]', with: 'blabla')
     click_button 'Create Upload'
     expect(current_path).to eq(uploads_path)
-    within('.flash') do
+    within(:css, '.flash') do
       expect(page).to have_selector('.notice', text: 'Upload created successfully')
     end
-    within('tr td:last-child') do
+    within(:css, 'tr td:last-child') do
       click_link 'Edit'
     end
     expect(page).to have_selector('h3', text: 'Edit Upload')

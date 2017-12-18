@@ -1,4 +1,5 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
+require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
@@ -7,7 +8,8 @@ require 'spec_helper'
 require 'rspec/rails'
 require 'capybara/rails'
 require 'capybara/rspec'
-require "capybara/poltergeist" # Add this line to require poltergeist: to have PhantomJS
+# require "capybara/poltergeist" # Add this line to require poltergeist: to have PhantomJS
+require "capybara/selenium/driver" # Add this line to require poltergeist: to have PhantomJS
 
 Capybara.register_driver :poltergeist do |app|
   Capybara::Poltergeist::Driver.new(app, js_errors: true)   # use js_errors: false to ignore javascript errors
@@ -16,8 +18,13 @@ end
 # Capybara.register_driver :poltergeist_debug do |app|
 #   Capybara::Poltergeist::Driver.new(app, :inspector => true)
 # end
+#
 
-Capybara.javascript_driver = :poltergeist
+Capybara.register_driver :selenium do |app|
+  Capybara::Selenium::Driver.new(app, :browser => :firefox)
+end
+
+Capybara.javascript_driver = :selenium
 
 # Add additional requires below this line. Rails is not loaded until this point!
 

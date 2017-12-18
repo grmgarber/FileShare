@@ -1,6 +1,6 @@
 require 'rails_helper.rb'
 
-RSpec.describe Upload do
+RSpec.describe Grant do
   before(:each) do
     @grant = build(:grant)
   end
