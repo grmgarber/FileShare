@@ -1,8 +1,6 @@
 # upload_grants_path	POST	/uploads/:upload_id/grants(.:format)	grants#create
 # upload_grant_path	DELETE	/uploads/:upload_id/grants/:id(.:format)	grants#destroy
-
 class GrantsController < ApplicationController
-
   before_action :set_tab_number
 
   #GrantsController#create demonstrates old way of submitting forms with AJAX, WITHOUT remote: true
@@ -34,6 +32,7 @@ class GrantsController < ApplicationController
     end
   end
 
+  # Destroy grant action
   def destroy
     res = Grant.delete(params[:id])
     if request.xhr?
@@ -42,13 +41,6 @@ class GrantsController < ApplicationController
     end
     redirect_to edit_upload_path(params[:upload_id]),
                 alert: (res == 1 ? 'Viewer removed successfully' : 'Failed to remove viewer')
-
-  end
-
-  # This method will return emails of []all users - (current user) - (users who can currently view the upload)
-  def potential_grantee_emails(upload_id)
-    grantee_user_ids  = Grant.where(upload_id: upload_id).select('user_id').map(&:user_id)
-    User.where("id NOT IN (?)", grantee_user_ids).where.not(id: current_user_id).map(&:email)
   end
 
   def set_tab_number

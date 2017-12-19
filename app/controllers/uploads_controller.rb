@@ -1,11 +1,13 @@
+# UploadsController class
 class UploadsController < ApplicationController
-
   respond_to :html, :js
 
+  # GET /uploads/new
   def new
     @u = Upload.new
   end
 
+  # POST /uploads
   def create
     @u = Upload.new
     @u.attributes = upload_params
@@ -17,17 +19,10 @@ class UploadsController < ApplicationController
     end
   end
 
+  # GET /uploads/id
   def edit
     @u = Upload.find(params[:id])
-
-    # prepare json data for members autocomplete
-    # @json_members = (User.where.not(id: current_user.id).order('email').select('id, email').inject(Hash.new) do |h,u|
-    #   h[u.email] = u.id; next h
-    # end).to_json
-
-
     @new_grant = Grant.new(upload: @u)
-
   end
 
   # UploadsController#update demonstrates the new Rails4 way,
@@ -48,10 +43,12 @@ class UploadsController < ApplicationController
     end
   end
 
+  # GET /uploads/id
   def show
     @u = Upload.find(params[:id])
   end
 
+  # DELETE /uploads/id
   def destroy
     u = Upload.find(params[:id])   rescue nil
     if u
@@ -62,6 +59,7 @@ class UploadsController < ApplicationController
     end
   end
 
+  # GET /uploads
   def index
     @uploads = Upload.all_viewable_by(current_user)
   end
@@ -74,6 +72,7 @@ class UploadsController < ApplicationController
 
   private
 
+  # protect against mass assignment abuse
   def upload_params
     params.require(:upload).permit(:upl_file, :description)
   end
