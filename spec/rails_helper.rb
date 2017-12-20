@@ -9,16 +9,16 @@ require 'rspec/rails'
 require 'capybara/rails'
 require 'capybara/rspec'
 # require "capybara/poltergeist" # Add this line to require poltergeist: to have PhantomJS
-require "capybara/selenium/driver" # Add this line to require poltergeist: to have PhantomJS
+require "capybara/selenium/driver"  # uncomment this, comment out polergeist above and set Capybara.javascript_driver
 
-Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new(app, js_errors: true)   # use js_errors: false to ignore javascript errors
-end
-
+# Capybara.register_driver :poltergeist do |app|
+#   Capybara::Poltergeist::Driver.new(app, js_errors: true)   # use js_errors: false to ignore javascript errors
+# end
+#
 # Capybara.register_driver :poltergeist_debug do |app|
 #   Capybara::Poltergeist::Driver.new(app, :inspector => true)
 # end
-#
+
 
 Capybara.register_driver :selenium do |app|
   Capybara::Selenium::Driver.new(app, :browser => :firefox)
@@ -95,5 +95,5 @@ RSpec.configure do |config|
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
 
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
 end

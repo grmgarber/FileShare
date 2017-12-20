@@ -16,7 +16,7 @@ RSpec.describe Grant do
   end
 
   it 'is invalid if another grant with the same upload_id has the same user_id' do
-    another_grant = FactoryGirl.create(:grant, upload: @grant.upload, user: @grant.user)
+    another_grant = FactoryBot.create(:grant, upload: @grant.upload, user: @grant.user)
     expect(@grant.save).to eq(false)  # Duplicate grant
   end
 

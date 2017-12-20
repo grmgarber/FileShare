@@ -4,7 +4,7 @@ Given /^The current session logged out$/ do
 end
 
 And /^An existing user with email (.+@.+) and password (.+) logs in$/ do |email, password|
-  FactoryGirl.create(:user, email: email, password: password, encrypted_password: User.new.send(:password_digest,password))
+  FactoryBot.create(:user, email: email, password: password, encrypted_password: User.new.send(:password_digest,password))
   fill_in('user[email]',    with: email)
   fill_in('user[password]', with: password)
   click_button 'Log in'

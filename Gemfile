@@ -41,10 +41,11 @@ group :development, :test do
   gem 'sqlite3'
   gem 'byebug'
   gem 'rspec-rails', '~> 3.5'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'capybara'
-  # gem 'poltergeist'
-  gem 'selenium-webdriver'
+  gem 'poltergeist'         # poltergeist is used when we do not want live browser
+  gem 'selenium-webdriver'  # selenium is used to have live browser experience (slower but better for debugging test)
+                            # select one or the other in spec/rails_helper.rb
   gem 'database_cleaner'
 end
 
