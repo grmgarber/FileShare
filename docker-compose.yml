@@ -1,0 +1,12 @@
+version: "2"
+
+services:
+  web:
+    build: .
+    volumes:
+#    /usr/src/app was specified as in Dockerfile as the root directory of the application
+#    since we want the app to notice changes without restarting (docker-compose down/up)
+#    we need to ensure that the source (in ./app) is mounted properly
+      - ./app:/usr/src/app/app
+    ports:
+      - "3000:3000"
