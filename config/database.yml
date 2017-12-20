@@ -19,14 +19,9 @@ default: &default
   timeout: 5000
 
 development:
+  adapter: sqlite3
   <<: *default
-#  database: db/development.sqlite3
-  adapter: oracle_enhanced
-  host: orahost
-  port: 1521
-  database: orcl
-  username: fupl
-  password: fupl
+  database: db/test.sqlite3
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
