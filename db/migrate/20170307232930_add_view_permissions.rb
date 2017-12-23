@@ -1,4 +1,4 @@
-class AddMemberPermissions < ActiveRecord::Migration
+class AddViewPermissions < ActiveRecord::Migration
   def change
     create_table :view_permissions do |t|
       t.integer :upload_id

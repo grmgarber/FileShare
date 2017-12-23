@@ -1,20 +1,27 @@
 version: '2'
 services:
+  webapp_setup:
+    build: .
+    depends_on:
+      - my_db
+    environment:
+      - PASSENGER_APP_ENV=development
+    entrypoint: ./setup.sh
   webapp:
     container_name: fupl
     build: .
     depends_on:
-       - db
-#      - fupl_setup
+       - my_db
+       - webapp_setup
     links:
-       - db:mysql
+       - my_db:mysql
     environment:
       - PASSENGER_APP_ENV=development
     ports:
       - "80:80"
     volumes:
       - .:/home/app/fupl
-  db:
+  my_db:
     image: mysql
     restart: always
     environment:
@@ -40,10 +47,4 @@ services:
 #    volumes:
 #      - /var/lib/postgresql/data
 #    command: bin/true
-#  fupl_setup:
-#    build .
-#    depends_on:
-#      - postgres
-#    environment:
-#      - PASSENGER_APP_ENV=development
-#    entrypoint: ./setup.sh
+

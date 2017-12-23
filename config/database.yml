@@ -5,6 +5,7 @@ development:
   username: root
   password: example
   database: mysql
-  host: fupl_db_1
+  host: fupl_my_db_1
+  port: 3306
 
 # fupl_db_1 is the name of the database service instance (docker ps -a)

@@ -1,3 +1,26 @@
 Show the ip address of the docker instance as seen on the host
     docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <instance_id_or_name>
-172.19.0.2
+
+Enter into a running instance
+    docker exec -it <instance_id_or_name> /bin/bash
+
+Build all images
+    docker-compose build
+
+Start all instance
+    docker-compose up -d   [-d is optional daemon mode]
+
+Stop all instances
+    docker-compose down
+
+List all instances, running and finished
+    docker ps -a
+
+Kill a finished instance
+    docker rm <instance_id>
+
+List all images
+    docker images
+
+Remove an image
+    docker rmi <image_id>
