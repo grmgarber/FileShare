@@ -1,25 +1,32 @@
 version: '2'
 services:
-#  fupl_setup:
-#    build .
-#    depends_on:
-#      - postgres
-#    environment:
-#      - PASSENGER_APP_ENV=development
-#    entrypoint: ./setup.sh
   webapp:
     container_name: fupl
     build: .
-#    depends_on:
-#      - postgres
+    depends_on:
+       - db
 #      - fupl_setup
+    links:
+       - db:mysql
     environment:
       - PASSENGER_APP_ENV=development
     ports:
       - "80:80"
     volumes:
       - .:/home/app/fupl
-#    command: cd /home/app/fupl && bundle install && bundle exec rails server --binding "0.0.0.0" --port "80"
+  db:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+
+# 1) connect to the mysql database docker instance
+# 2) run:
+#      mysql --host=localhost --user=root --password=example [my_db]
+#      if you do not know the name of the database (my_db), omit it
+# 3) If you did not specify the database name in (2) run this at the sql prompt:
+#      show databases;
+
 #  postgres:
 #    image: postgres:9.5.3
 #    environment:
@@ -33,3 +40,10 @@ services:
 #    volumes:
 #      - /var/lib/postgresql/data
 #    command: bin/true
+#  fupl_setup:
+#    build .
+#    depends_on:
+#      - postgres
+#    environment:
+#      - PASSENGER_APP_ENV=development
+#    entrypoint: ./setup.sh

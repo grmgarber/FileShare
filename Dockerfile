@@ -6,7 +6,9 @@ ENV HOME /root
 CMD ["/sbin/my_init"]
 
 # Additional package to be able to ping DB service
-#RUN apt-get update && apt-get install -y -o Dpkg::Options::="force-confold" netcat
+RUN apt-get update && apt-get install -y -o Dpkg::Options::="--force-confold" netcat
+
+RUN apt-get install -y nodejs vim less mysql-client imagemagick --no-install-recommends && rm -rf /var/lib/apt/lists/*
 
 # Enable nginx and passenger
 RUN rm -f /etc/service/nginx/down
@@ -29,7 +31,6 @@ COPY . /home/app/fupl
 RUN usermod -u 1000 app
 RUN chown -R app:app /home/app/fupl
 WORKDIR /home/app/fupl
-RUN bundle exec rake db:schema:load
 
 # Clean up apt
 RUN apt-get clean & rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
