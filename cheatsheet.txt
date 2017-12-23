@@ -1,0 +1,3 @@
+Show the ip address of the docker instance as seen on the host
+    docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <instance_id_or_name>
+172.19.0.2

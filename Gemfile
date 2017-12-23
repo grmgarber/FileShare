@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'sqlite3'
 gem 'rails', '4.2.10'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -26,6 +26,7 @@ gem 'paperclip', '~> 5.1'
 gem 'thin'
 gem 'devise'
 gem 'jquery-ui-rails'
+gem 'tzinfo-data'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -38,7 +39,6 @@ gem 'jquery-ui-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'sqlite3'
   gem 'byebug'
   gem 'rspec-rails', '~> 3.5'
   gem 'factory_bot_rails'

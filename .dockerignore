@@ -1,2 +1,4 @@
 .git
-Gemfile.lock
+.gitignore
+tmp
+cheatsheet.txt

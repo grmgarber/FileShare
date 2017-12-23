@@ -1,12 +1,35 @@
-version: "2"
-
+version: '2'
 services:
-  web:
+#  fupl_setup:
+#    build .
+#    depends_on:
+#      - postgres
+#    environment:
+#      - PASSENGER_APP_ENV=development
+#    entrypoint: ./setup.sh
+  webapp:
+    container_name: fupl
     build: .
-    volumes:
-#    /usr/src/app was specified as in Dockerfile as the root directory of the application
-#    since we want the app to notice changes without restarting (docker-compose down/up)
-#    we need to ensure that the source (in ./app) is mounted properly
-      - ./app:/usr/src/app/app
+#    depends_on:
+#      - postgres
+#      - fupl_setup
+    environment:
+      - PASSENGER_APP_ENV=development
     ports:
-      - "3000:3000"
+      - "80:80"
+    volumes:
+      - .:/home/app/fupl
+#    command: cd /home/app/fupl && bundle install && bundle exec rails server --binding "0.0.0.0" --port "80"
+#  postgres:
+#    image: postgres:9.5.3
+#    environment:
+#      - POSTGRES_PASSWORD=mysecretpwd
+#      - POSTGRES_USER=fupl
+#      - POSTGRES_DB=fupl_development
+#    volumes_from:
+#      - postgres_data
+#  postgres_data:
+#    image: postgres:9.5.3
+#    volumes:
+#      - /var/lib/postgresql/data
+#    command: bin/true

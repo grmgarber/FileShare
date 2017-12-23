@@ -1,23 +1,36 @@
-FROM ruby:2.4
+#https://github.com/phusion/passenger-docker
+FROM phusion/passenger-ruby24
+ENV HOME /root
 
-# throw errors if Gemfile has been modified since Gemfile.lock
-# RUN bundle config --global frozen 1
+# Use baseimage-docker init process
+CMD ["/sbin/my_init"]
 
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+# Additional package to be able to ping DB service
+#RUN apt-get update && apt-get install -y -o Dpkg::Options::="force-confold" netcat
 
-EXPOSE 3000
-CMD ["rails", "server", "-b", "0.0.0.0"]
+# Enable nginx and passenger
+RUN rm -f /etc/service/nginx/down
 
-RUN apt-get update && apt-get install -y nodejs --no-install-recommends && rm -rf /var/lib/apt/lists/*
-RUN apt-get update && apt-get install -y mysql-client postgresql-client sqlite3 --no-install-recommends && rm -rf /var/lib/apt/lists/*
+# Add virtual host entry for the application
+RUN rm /etc/nginx/sites-enabled/default
+ADD fupl.conf /etc/nginx/sites-enabled/fupl.conf
 
-COPY Gemfile /usr/src/app/
+# If we need env variables for nginx
+ADD rails-env.conf /etc/nginx/main.d/rails-env.conf
 
-# Uncomment the line below if Gemfile.lock is maintained outside of build process
-# COPY Gemfile.lock /usr/src/app/
-
-
+# Install gems.  It is better to have an independent layer for them
+WORKDIR /tmp
+ADD Gemfile /tmp/
+ADD Gemfile.lock /tmp/
 RUN bundle install
 
-COPY . /usr/src/app
+
+COPY . /home/app/fupl
+RUN usermod -u 1000 app
+RUN chown -R app:app /home/app/fupl
+WORKDIR /home/app/fupl
+RUN bundle exec rake db:schema:load
+
+# Clean up apt
+RUN apt-get clean & rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+EXPOSE 80
