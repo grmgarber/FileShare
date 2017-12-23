@@ -6,3 +6,5 @@ development:
   password: example
   database: mysql
   host: fupl_db_1
+
+# fupl_db_1 is the name of the database service instance (docker ps -a)
