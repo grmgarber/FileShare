@@ -26,6 +26,10 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: example
+    volumes:
+      - mysql_data_vol:/var/lib/mysql
+volumes:
+  mysql_data_vol:
 
 # 1) connect to the mysql database docker instance
 # 2) run:
@@ -33,18 +37,4 @@ services:
 #      if you do not know the name of the database (my_db), omit it
 # 3) If you did not specify the database name in (2) run this at the sql prompt:
 #      show databases;
-
-#  postgres:
-#    image: postgres:9.5.3
-#    environment:
-#      - POSTGRES_PASSWORD=mysecretpwd
-#      - POSTGRES_USER=fupl
-#      - POSTGRES_DB=fupl_development
-#    volumes_from:
-#      - postgres_data
-#  postgres_data:
-#    image: postgres:9.5.3
-#    volumes:
-#      - /var/lib/postgresql/data
-#    command: bin/true
 
