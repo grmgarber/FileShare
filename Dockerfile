@@ -8,6 +8,7 @@ CMD ["/sbin/my_init"]
 # Additional package to be able to ping DB service
 RUN apt-get update && apt-get install -y -o Dpkg::Options::="--force-confold" netcat
 
+# mysql-client and imagemagic
 RUN apt-get install -y nodejs vim less mysql-client imagemagick --no-install-recommends && rm -rf /var/lib/apt/lists/*
 
 # Enable nginx and passenger

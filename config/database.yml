@@ -1,11 +1,18 @@
-development:
+default: &default
   adapter: mysql2
   encoding: utf8
   pool: 5
   username: root
   password: example
-  database: mysql
   host: fupl_my_db_1
   port: 3306
+
+development:
+  <<: *default
+  database: mysql
+
+test:
+  <<: *default
+  database: db_test
 
 # fupl_db_1 is the name of the database service instance (docker ps -a)

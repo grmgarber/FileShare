@@ -24,3 +24,20 @@ List all images
 
 Remove an image
     docker rmi <image_id>
+
+Run a one-off command inside the instance (example)
+    docker-compose run --rm --workdir=/home/app/fupl webapp bin/rails --version
+
+    --rm                - remove the container after the run
+    --workdir           - working directory inside the container
+    webapp              - name of the service drom the docker-compose.yml
+    bin/rails --version - command executed in the container
+
+        If more than one command needs to be excuted, run
+    docker exec -it .... and then execute a series of commands
+
+ e.g, to create the test database:
+    docker-compose run --rm webapp bash -c "RAILS_ENV=test bundle exec rake db:create"
+      to run the tests:
+    docker-compose run --rm webapp bash -c "bundle exec rake spec"
+
