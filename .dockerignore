@@ -1,4 +1,13 @@
-.git
+/.bundle
+/log/*
+/.git/*
 .gitignore
-tmp
+/tmp/*
+!/log/.keep
+!/tmp/.keep
 cheatsheet.txt
+.byebug_*
+/spec/features/*
+.idea/**/*
+public/*
+test/**/*

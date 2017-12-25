@@ -15,6 +15,7 @@
 /log/*
 !/log/.keep
 /tmp
+!/tmp/.keep
 .idea/**/*
 public/*
 test/**/*
