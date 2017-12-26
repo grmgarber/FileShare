@@ -3,7 +3,8 @@
 class GrantsController < ApplicationController
   before_action :set_tab_number
 
-  #GrantsController#create demonstrates old way of submitting forms with AJAX, WITHOUT remote: true
+  # GrantsController#create demonstrates old way of submitting forms with AJAX,
+  # WITHOUT remote: true
   def create
     g = Grant.new(upload_id: params[:upload_id])
     user = User.where(email: params[:email]).limit(1).try(:first)

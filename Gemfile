@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-# gem 'sqlite3'
-gem 'mysql2'
+gem 'sqlite3'
+# gem 'mysql2'
 gem 'rails', '4.2.10'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -20,7 +20,6 @@ gem 'jquery-rails'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem "haml-rails", "~> 0.9"
 gem 'paperclip', '~> 5.1'
@@ -28,6 +27,7 @@ gem 'thin'
 gem 'devise'
 gem 'jquery-ui-rails'
 gem 'tzinfo-data'
+gem 'json'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -41,13 +41,14 @@ gem 'tzinfo-data'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-  gem 'rspec-rails', '~> 3.5'
+  gem 'rspec-rails', '~> 3'
   gem 'factory_bot_rails'
   gem 'capybara'
-  gem 'poltergeist'         # poltergeist is used when we do not want live browser
+  # gem 'poltergeist'         # poltergeist is used when we do not want live browser
   gem 'selenium-webdriver'  # selenium is used to have live browser experience (slower but better for debugging test)
                             # select one or the other in spec/rails_helper.rb
   gem 'database_cleaner'
+  gem 'cucumber-rails', require: false
 end
 
 group :development do
@@ -58,8 +59,3 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 end
-
-group :test do
-  gem 'cucumber-rails', require: false
-end
-

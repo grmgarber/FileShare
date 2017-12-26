@@ -6,5 +6,5 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :authenticate_user!  # devise
 
-  GENERIC_FORM_ERROR_FLASH = 'Please correct errors below and re-submit.'
+  GENERIC_FORM_ERROR_FLASH = 'Please correct errors below and re-submit.'.freeze
 end
