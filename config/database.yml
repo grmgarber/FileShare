@@ -1,32 +1,32 @@
-#default: &default
-#  adapter: mysql2
-#  encoding: utf8
-#  pool: 5
-#  username: root
-#  password: example
-#  host: fupl_my_db_1
-#  port: 3306
-#
-#development:
-#  <<: *default
-#  database: mysql
-#
-#test:
-#  <<: *default
-#  database: db_test
-
-
 default: &default
-  adapter: sqlite3
+  adapter: mysql2
+  encoding: utf8
   pool: 5
-  timeout: 5000
+  username: root
+  password: example
+  host: dbms
+  port: 3306
 
 development:
   <<: *default
-  database: db/development.sqlite3
+  database: mysql
 
-test: &test
+test:
   <<: *default
-  database: db/production.sqlite3
+  database: db_test
+
+
+#default: &default
+#  adapter: sqlite3
+#  pool: 5
+#  timeout: 5000
+#
+#development:
+#  <<: *default
+#  database: db/development.sqlite3
+#
+#test: &test
+#  <<: *default
+#  database: db/production.sqlite3
 
 

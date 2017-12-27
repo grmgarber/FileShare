@@ -3,7 +3,7 @@ services:
   webapp_setup:
     build: .
     depends_on:
-      - my_db
+      - dbms
     environment:
       - PASSENGER_APP_ENV=development
     entrypoint: ./setup.sh
@@ -11,17 +11,17 @@ services:
     container_name: fupl
     build: .
     depends_on:
-       - my_db
+       - dbms
        - webapp_setup
     links:
-       - my_db:mysql
+       - dbms:mysql
     environment:
       - PASSENGER_APP_ENV=development
     ports:
       - "80:80"
     volumes:
       - .:/home/app/fupl
-  my_db:
+  dbms:
     image: mysql
     restart: always
     environment:
