@@ -2,6 +2,8 @@
 
 # dbms is the hostname of the mysql service instance in docker-compose; 3306 is mysql default port
 
+# Note that the hostname of the service dbms (kube) is also dbms, both
+# in the line below, as well as database.yml
 echo "Waiting for MySQL to start on port 3306..."
 while ! nc -z dbms 3306; do
     sleep 0.5

@@ -1,0 +1,33 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:           # Exactly the same as bove
+  name: mysqldp
+  labels:
+    app: webapp
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate  # Kill all the existing pods of this service before launching new ones
+  template:
+    metadata:
+      labels:
+        app: webapp
+        tier: mysql
+    spec:
+      containers:
+      - image: mysql:5.7
+        name: mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: example
+        ports:
+        - containerPort: 3306
+          name: mysql
+#        volumeMounts:
+#          - name: mysql-persistent-storage
+#            mountPath: /var/lib/mysql
+#      volumes:
+#        - name: mysql-persistent-storage
+#          awsElasticBlockStore:
+#            volumeID: vol-fe268f4a
+#            fsType: ext4

@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: dbms    # We'll use this name to identify the service from the cluster
+                # It will also be the inter-cluster hostname of the service
+  labels:
+    app: dbmsl        # just labels for filtering
+spec:               #
+  ports:            #
+    - port: 3306    # That's where the service is listening: default mysql port
+      protocol: TCP
+  selector:         # selector identifies application containers:
+    app: webapp     # app will be same for all services of the cluster
+    tier: mysql     # tier will be unique for this very service
+  clusterIP: None  # This means the service is only available within the cluster, but not outside

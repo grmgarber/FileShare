@@ -9,9 +9,9 @@ spec:
     spec:
       containers:
       - name: setup
-        image: pacuna/webapp:LAST_COMMIT
-        command: ["/bin/bash", "./setup.production.sh"]
+        image: grmgarber/fupl:0b1055a
+        command: ["/bin/bash", "./setup.sh"]
         env:
         - name: PASSENGER_APP_ENV
-          value: production
+          value: development
       restartPolicy: Never

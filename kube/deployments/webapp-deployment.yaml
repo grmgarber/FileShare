@@ -10,7 +10,7 @@ spec:
   selector:
     app: webapp
     tier: frontend
-  type: LoadBalancer
+  type: NodePort # ? LoadBalancer for production
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -27,13 +27,12 @@ spec:
         tier: frontend
     spec:
       containers:
-      - image: pacuna/webapp:d15587c
+      - image: grmgarber/fupl:0b1055a
         name: webapp
         env:
         - name: PASSENGER_APP_ENV
-          value: production
+          value: development
         ports:
         - containerPort: 80
           name: webapp
         imagePullPolicy: Always
-        

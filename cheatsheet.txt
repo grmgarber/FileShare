@@ -25,6 +25,15 @@ List all images
 Remove an image
     docker rmi <image_id>
 
+Stop all containers
+    docker stop $(docker ps -a -q)
+
+Remove all containers
+    docker rm $(docker ps -a -q)
+
+Remove all docker images
+    docker rmi $(docker images -q)
+
 Run a one-off command inside the instance (example)
     docker-compose run --rm --workdir=/home/app/fupl webapp bin/rails --version
 
@@ -40,4 +49,12 @@ Run a one-off command inside the instance (example)
     docker-compose run --rm webapp bash -c "RAILS_ENV=test bundle exec rake db:create"
       to run the tests:
     docker-compose run --rm webapp bash -c "bundle exec rake spec"
+
+===========================================================================
+sudo minikube start --vm-driver=VirtualBox
+sudo kubectl create -f kube/deployments/mysql-deployment.yaml
+sudo kubectl delete service mysql
+sudo kubectl create -f kube/jobs/setup-job.yaml
+sudo kubectl get pods
+sudo kubectl logs <pod-name>
 

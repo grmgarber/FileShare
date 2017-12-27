@@ -42,7 +42,6 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'rspec-rails', '~> 3'
-  gem 'factory_bot_rails'
   gem 'capybara'
   # gem 'poltergeist'         # poltergeist is used when we do not want live browser
   gem 'selenium-webdriver'  # selenium is used to have live browser experience (slower but better for debugging test)
@@ -58,4 +57,8 @@ group :development do
   gem 'web-console', '~> 2.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+end
+
+group :test do
+  gem 'factory_bot_rails', require: false
 end
