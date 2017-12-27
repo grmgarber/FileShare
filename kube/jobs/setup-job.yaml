@@ -9,7 +9,7 @@ spec:
     spec:
       containers:
       - name: setup
-        image: grmgarber/fupl:0b1055a
+        image: grmgarber/fupl:0ede86c
         command: ["/bin/bash", "./setup.sh"]
         env:
         - name: PASSENGER_APP_ENV

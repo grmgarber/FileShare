@@ -27,7 +27,7 @@ spec:
         tier: frontend
     spec:
       containers:
-      - image: grmgarber/fupl:0b1055a
+      - image: grmgarber/fupl:0ede86c
         name: webapp
         env:
         - name: PASSENGER_APP_ENV
