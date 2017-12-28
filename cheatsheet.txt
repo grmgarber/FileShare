@@ -51,10 +51,13 @@ Run a one-off command inside the instance (example)
     docker-compose run --rm webapp bash -c "bundle exec rake spec"
 
 ===========================================================================
-sudo minikube start --vm-driver=VirtualBox
+sudo minikube start --vm-driver=VirtualBox # start minikube
+sudo minikube dashboard &                  # dashboard to control everything
 sudo kubectl create -f kube/deployments/mysql-deployment.yaml
 sudo kubectl delete service mysql
 sudo kubectl create -f kube/jobs/setup-job.yaml
 sudo kubectl get pods
 sudo kubectl logs <pod-name>
+
+sudo kuebctl config current-context
 
