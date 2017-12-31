@@ -10,7 +10,7 @@ spec:
   selector:
     app: webapp
     tier: frontend
-  type: NodePort # ? LoadBalancer for production
+  type: LoadBalancer   # This is required for the service to be accessible from outside!
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment

@@ -6,6 +6,9 @@ metadata:           # Exactly the same as bove
     app: webapp
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: webapp
   strategy:
     type: Recreate  # Kill all the existing pods of this service before launching new ones
   template:
@@ -14,8 +17,15 @@ spec:
         app: webapp
         tier: mysql
     spec:
+      volumes:
+      - name: mysql-pv-storage
+        gcePersistentDisk:      # https://cloud.google.com/compute/docs/disks/add-persistent-disk#formatting
+          pdName: mysql-disk
+          fsType: ext4
       containers:
       - image: mysql:5.7
+        args:
+        - "--ignore-db-dir=lost+found"   # needed as mysql 5.7 does not like lost+found directory on the new disk
         name: mysql
         env:
         - name: MYSQL_ROOT_PASSWORD
@@ -23,11 +33,11 @@ spec:
         ports:
         - containerPort: 3306
           name: mysql
-#        volumeMounts:
-#          - name: mysql-persistent-storage
-#            mountPath: /var/lib/mysql
-#      volumes:
-#        - name: mysql-persistent-storage
-#          awsElasticBlockStore:
-#            volumeID: vol-fe268f4a
-#            fsType: ext4
+        volumeMounts:
+        - mountPath: "/var/lib/mysql"    # this is where the persistent disk should be mounted for mysql
+          name: mysql-pv-storage
+      nodeSelector:                      # this will ensure that the mysql pod
+        tier: mysql                         # will run on the ECS compute node labeled mysql
+                                            # You need to label "mysql" the node that has the persistent
+                                            # disk mounted on
+                                            
