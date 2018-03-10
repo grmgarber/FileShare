@@ -3,11 +3,14 @@
 class GrantsController < ApplicationController
   before_action :set_tab_number
 
-  #GrantsController#create demonstrates old way of submitting forms with AJAX, WITHOUT remote: true
+  # GrantsController#create demonstrates old way of submitting forms with AJAX,
+  # WITHOUT remote: true
   def create
     g = Grant.new(upload_id: params[:upload_id])
     user = User.where(email: params[:email]).limit(1).try(:first)
-    message = 'You do not need readonly access to your own files'  if user && user.id == current_user.id
+    if user && user.id == current_user.id
+      message = 'You do not need readonly access to your own files'
+    end
     g.user = user
     if user && user.id != current_user.id && g.save
       g.user = user
@@ -16,12 +19,13 @@ class GrantsController < ApplicationController
         @new_grant = Grant.new(upload_id: params[:upload_id])
         render 'create', layout: false
       else
-        redirect_to edit_upload_path(params[:upload_id]), notice: "User #{user.email} given permission to view the upload"
+        redirect_to edit_upload_path(params[:upload_id]),
+                    notice: "User #{user.email} given permission to view the upload"
       end
       return
     end
     if user
-      message ||= g.errors.full_messages.join("; ")
+      message ||= g.errors.full_messages.join('; ')
     else
       message = "User account for #{params[:email]} not found"
     end
@@ -39,11 +43,17 @@ class GrantsController < ApplicationController
       render nothing: true
       return
     end
-    redirect_to edit_upload_path(params[:upload_id]),
-                alert: (res == 1 ? 'Viewer removed successfully' : 'Failed to remove viewer')
+    if res == 1
+      redirect_to edit_upload_path(params[:upload_id]),
+                  notice: 'Viewer removed successfully'
+    else
+      redirect_to edit_upload_path(params[:upload_id]),
+                  alert: 'Failed to remove viewer'
+    end
   end
 
   def set_tab_number
-    flash[:accordion_tab_number] = "1"
+    flash[:accordion_tab_number] = '1'
   end
+
 end
